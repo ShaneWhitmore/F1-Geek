@@ -42,9 +42,11 @@ fun DriverList(drivers: List<Driver>, modifier: Modifier = Modifier) {
             onValueChange = { value -> filterText = value },
             label = { Text("Search") }
         )
-        drivers.filter { it.firstName.contains(filterText, true) }.forEach { driver ->
-            Text("${driver.firstName} ${driver.surname}")
-        }
+        drivers
+            .filter { it.fullName.contains(filterText, true) }
+            .forEach { driver ->
+                Text("${driver.firstName} ${driver.surname}")
+            }
     }
 }
 

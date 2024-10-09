@@ -4,5 +4,8 @@ class Driver(
     val firstName: String,
     val surname: String,
     val abbreviatedName: String,
-    val number: Int
+    val number: Int,
+    val fullName:String = firstName + surname
+
+
 )
