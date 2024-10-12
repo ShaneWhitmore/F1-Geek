@@ -19,8 +19,5 @@ fun seedDriverStore(): DriverStore{
         Driver(firstName = "Esteban", surname = "Ocon", abbreviatedName = "OCO", number = 31)
     )
 
-
-
-
     return DriverStore(drivers)
 }
