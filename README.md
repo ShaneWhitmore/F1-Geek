@@ -78,7 +78,16 @@ classDiagram
     Team "1" --> "1" Driver: primaryDriver
     Team "1" --> "1" Driver: secondaryDriver
     Team "1" --> "1..*" Driver: reserveDrivers
-    Circuit --> Result:raceResults
+    Result "1" --> "1" Circuit:Sakhir
+    Result "1" --> "1" Circuit:Bahrain
+    Result "1" --> "1" Circuit:Saudi Arabia
+    Result "1" --> "1" Circuit:Australia
+    Result "1" --> "1" Circuit:Japan
+    Result "1" --> "1" Circuit:China
+    Result "1" --> "1" Circuit:Miami
+    Result "1" --> "1" Circuit:Emilia-Romagna
+    Result "1" --> "1" Circuit:Monaco
+    Result "1" --> "1" Circuit:Canada
     class Driver{
       +String surname
       +String firstName
