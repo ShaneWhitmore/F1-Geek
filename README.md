@@ -42,8 +42,21 @@ Source for the F1Geek android app.
 mindmap
   root((F1 Geek))
     Drivers
+        name
+        abreviation
+        previous contracts/F1 teams
+        racing career
     Teams
+        Manager
+        Sponsors
+        career
+        Fun fact
+
     Race Tracks
+        Track name
+        previous winners
+        fun fact
+
     Seasons
         Races
             Results
