@@ -109,3 +109,9 @@ classDiagram
     +String year
     }
 ```
+
+## UI Concept Design
+
+<p align="center">  
+  <img src="/img/Screen_Recording_20241018_162025_Figma-ezgif.com-video-to-gif-converter.gif" height="512px"/>
+</p>
