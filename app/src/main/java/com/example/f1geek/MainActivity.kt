@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,7 +20,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.f1geek.model.Driver
+import com.example.f1geek.model.Team
 import com.example.f1geek.model.seedDriverStore
+import com.example.f1geek.model.seedTeamStore
 import com.example.f1geek.ui.theme.F1GeekTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,16 +34,36 @@ class MainActivity : ComponentActivity() {
             F1GeekTheme {
                 val driverStore = seedDriverStore()
 
-                DriverList(
+                /*DriverList(
                     drivers = driverStore.drivers, Modifier
                         .fillMaxWidth()
                         .padding(4.dp)
                 )
+
+                 */
+                val teamStore = seedTeamStore()
+                TeamList(teams = teamStore.teams, Modifier
+                    .fillMaxWidth()
+                    .padding(4.dp))
             }
         }
     }
 
 
+    @Composable
+    fun DriverList(drivers: List<Driver>, modifier: Modifier = Modifier) {
+        Column(modifier) {
+            drivers.forEachIndexed { index, driver ->
+                val backgroundColor = if (index % 2 == 0) Color.LightGray else Color.White
+                Text(
+                    text = driver.fullName,
+                    modifier = modifier.background(backgroundColor)
+                )
+            }
+        }
+    }
+
+    /*
     @Composable
     fun DriverList(drivers: List<Driver>, modifier: Modifier = Modifier) {
         var filterText by rememberSaveable { mutableStateOf("") }
@@ -61,12 +84,30 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+     */
+
+    @Composable
+    fun TeamList(teams: List<Team>, modifier: Modifier = Modifier) {
+        Column(modifier) {
+            teams.forEachIndexed { index, team ->
+                val backgroundColor = if (index % 2 == 0) Color.LightGray else Color.White
+                Text(
+                    text = team.name,
+                    modifier = modifier
+                        .background(backgroundColor)
+                        .clickable { println(team.name) },
+                )
+            }
+        }
+    }
+
     @Preview(showBackground = true)
     @Composable
     fun GreetingPreview() {
         F1GeekTheme {
             val driverStore = seedDriverStore()
-            DriverList(drivers = driverStore.drivers)
+            val teamStore = seedTeamStore()
+            TeamList(teams = teamStore.teams)
         }
 
     }

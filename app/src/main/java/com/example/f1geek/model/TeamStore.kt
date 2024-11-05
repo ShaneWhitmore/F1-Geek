@@ -1,9 +1,12 @@
 package com.example.f1geek.model
 
-class DriverStore(val drivers: List<Driver> = mutableListOf())
+class TeamStore(
+    val teams: List<Team> = mutableListOf(),
+    val drivers: List<Driver> = mutableListOf()
+)
 
-fun seedDriverStore(): DriverStore{
-
+fun seedTeamStore(): TeamStore{
+    val reserveDriver: List<Driver> = mutableListOf();
     val drivers = mutableListOf(
         Driver(firstName = "Lewis", surname = "Hamilton", abbreviatedName = "HAM", number = 44),
         Driver(firstName = "Max", surname = "Verstappen", abbreviatedName = "VER", number = 1),
@@ -17,5 +20,11 @@ fun seedDriverStore(): DriverStore{
         Driver(firstName = "Esteban", surname = "Ocon", abbreviatedName = "OCO", number = 31)
     )
 
-    return DriverStore(drivers)
+    val teams = mutableListOf(
+        Team(name="Ferrari" , primaryDriver=drivers.get(2) , secondaryDriver=drivers.get(5), reserveDrivers = reserveDriver),
+        Team(name="RedBull" , primaryDriver=drivers.get(1) , secondaryDriver=drivers.get(3), reserveDrivers = reserveDriver),
+        Team(name="Mercedes" , primaryDriver=drivers.get(0) , secondaryDriver=drivers.get(4), reserveDrivers = reserveDriver),
+    )
+
+    return TeamStore(teams = teams, drivers = drivers)
 }
