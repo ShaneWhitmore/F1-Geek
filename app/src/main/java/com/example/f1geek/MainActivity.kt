@@ -40,40 +40,21 @@ class MainActivity : ComponentActivity() {
                 //val driverStore = seedDriverStore()
                 val teamStore = seedTeamStore()
                 var currentScreen by remember { mutableStateOf("") }
-
-                /*DriverList(
-                    drivers = driverStore.drivers, Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp)
-                )
-
-                 */
-
                 val onTeamClick = { team: Team ->
                     println("Selected ${team.name}")
                     selectedTeam = team
-
-                    currentScreen = "Team"
+                    currentScreen = "team"
                 }
                 println("Current screen is $currentScreen")
 
-                if (currentScreen === "Team") {
-                    //val drivers = teamStore.drivers.filter { it.team.name === selectedTeam?.name }
+
+                if (currentScreen === "team") {
                     val teams = teamStore.teams.filter { it.name === selectedTeam?.name }
-
-                    TeamList(
-                        teams = teams, onTeamClick, Modifier
-                            .fillMaxWidth()
-                            .padding(4.dp)
-                    )
-
                     DriverList(
-                        teams = teams, onClickHandler = {}, Modifier
+                        teams = teams, { currentScreen = "home" }, Modifier
                             .fillMaxWidth()
                             .padding(4.dp)
                     )
-
-
                 } else {
                     TeamList(
                         teams = teamStore.teams, onTeamClick, Modifier
@@ -92,10 +73,17 @@ class MainActivity : ComponentActivity() {
             Button(onClick = { onClickHandler() }, modifier = modifier) {
                 Text("Home")
             }
+
             teams.forEachIndexed { index, team ->
                 val backgroundColor = if (index % 2 == 0) Color.LightGray else Color.White
                 Text(
                     text = team.primaryDriver.fullName,
+
+                    modifier = modifier.background(backgroundColor)
+                )
+                Text(
+                    text = team.secondaryDriver.fullName,
+
                     modifier = modifier.background(backgroundColor)
                 )
             }
