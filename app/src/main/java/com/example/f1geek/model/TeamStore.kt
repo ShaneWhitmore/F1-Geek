@@ -7,24 +7,56 @@ class TeamStore(
 
 fun seedTeamStore(): TeamStore{
     val reserveDriver: List<Driver> = mutableListOf();
-    val drivers = mutableListOf(
-        Driver(firstName = "Lewis", surname = "Hamilton", abbreviatedName = "HAM", number = 44),
-        Driver(firstName = "Max", surname = "Verstappen", abbreviatedName = "VER", number = 1),
-        Driver(firstName = "Charles", surname = "Leclerc", abbreviatedName = "LEC", number = 16),
-        Driver(firstName = "Sergio", surname = "Perez", abbreviatedName = "PER", number = 11),
-        Driver(firstName = "George", surname = "Russel", abbreviatedName = "RUS", number = 63),
-        Driver(firstName = "Carlos", surname = "Sainz", abbreviatedName = "SAI", number = 55),
-        Driver(firstName = "Lando", surname = "Norris", abbreviatedName = "NOR", number = 4),
-        Driver(firstName = "Fernando", surname = "Alonso", abbreviatedName = "ALO", number = 14),
-        Driver(firstName = "Oscar", surname = "Piastri", abbreviatedName = "PIA", number = 81),
-        Driver(firstName = "Esteban", surname = "Ocon", abbreviatedName = "OCO", number = 31)
-    )
+    //Ferrari
+    val leclerc = Driver(firstName = "Charles", surname = "Leclerc", abbreviatedName = "LEC", number = 16)
+    val sainz = Driver(firstName = "Carlos", surname = "Sainz", abbreviatedName = "SAI", number = 55)
+    //Mercedes
+    val hamilton = Driver(firstName = "Lewis", surname = "Hamilton", abbreviatedName = "HAM", number = 44)
+    val russell = Driver(firstName = "George", surname = "Russel", abbreviatedName = "RUS", number = 63)
+    //RedBull
+    val verstappen = Driver(firstName = "Max", surname = "Verstappen", abbreviatedName = "VER", number = 1)
+    val perez = Driver(firstName = "Sergio", surname = "Perez", abbreviatedName = "PER", number = 11)
+    //Mclaren
+    val norris = Driver(firstName = "Lando", surname = "Norris", abbreviatedName = "NOR", number = 4)
+    val piastri = Driver(firstName = "Oscar", surname = "Piastri", abbreviatedName = "PIA", number = 81)
+    //Aston Martin
+    val alonso =  Driver(firstName = "Fernando", surname = "Alonso", abbreviatedName = "ALO", number = 14)
+    val stroll = Driver(firstName = "Lance", surname = "Stroll", abbreviatedName = "STR", number = 18)
 
-    val teams = mutableListOf(
-        Team(name="Ferrari" , primaryDriver=drivers.get(2) , secondaryDriver=drivers.get(5), reserveDrivers = reserveDriver),
-        Team(name="RedBull" , primaryDriver=drivers.get(1) , secondaryDriver=drivers.get(3), reserveDrivers = reserveDriver),
-        Team(name="Mercedes" , primaryDriver=drivers.get(0) , secondaryDriver=drivers.get(4), reserveDrivers = reserveDriver),
+    val ferrari = Team(name="Ferrari" ,
+        primaryDriver=leclerc,
+        secondaryDriver=sainz,
+        reserveDrivers = reserveDriver)
+
+    val mercedes = Team(name="Mercedes" ,
+        primaryDriver=hamilton,
+        secondaryDriver=russell,
+        reserveDrivers = reserveDriver)
+
+    val redBull = Team(name="RedBull" ,
+        primaryDriver=verstappen,
+        secondaryDriver=perez,
+        reserveDrivers = reserveDriver)
+
+    val mcLaren = Team(name="McLaren" ,
+        primaryDriver=norris,
+        secondaryDriver=piastri,
+        reserveDrivers = reserveDriver)
+
+    val astonMartin = Team(name="Aston Martin" ,
+        primaryDriver=alonso,
+        secondaryDriver=stroll,
+        reserveDrivers = reserveDriver)
+
+    val teams = listOf(
+        ferrari,
+        mercedes,
+        redBull,
+        mcLaren,
+        astonMartin
+
     )
+    val drivers = listOf(leclerc, sainz, hamilton, russell, verstappen, perez, norris,piastri,alonso,stroll)
 
     return TeamStore(teams = teams, drivers = drivers)
 }

@@ -13,6 +13,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -33,6 +34,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             F1GeekTheme {
                 val driverStore = seedDriverStore()
+                val teamStore = seedTeamStore()
+                var currentScreen by remember { mutableStateOf("") }
 
                 /*DriverList(
                     drivers = driverStore.drivers, Modifier
@@ -41,10 +44,27 @@ class MainActivity : ComponentActivity() {
                 )
 
                  */
-                val teamStore = seedTeamStore()
-                TeamList(teams = teamStore.teams, Modifier
-                    .fillMaxWidth()
-                    .padding(4.dp))
+
+                val onTeamClick = { team: Team ->
+                    println("Selected ${team.name}")
+                    currentScreen = "Team"
+                }
+                println("Current screen is $currentScreen")
+
+                if (currentScreen === "Team") {
+                    val drivers = teamStore.drivers
+                    DriverList(
+                        drivers = drivers, Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp)
+                    )
+                } else {
+                    TeamList(
+                        teams = teamStore.teams, onTeamClick, Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp)
+                    )
+                }
             }
         }
     }
@@ -87,7 +107,7 @@ class MainActivity : ComponentActivity() {
      */
 
     @Composable
-    fun TeamList(teams: List<Team>, modifier: Modifier = Modifier) {
+    fun TeamList(teams: List<Team>,  onClickHandler: (Team) -> Unit ,modifier: Modifier = Modifier) {
         Column(modifier) {
             teams.forEachIndexed { index, team ->
                 val backgroundColor = if (index % 2 == 0) Color.LightGray else Color.White
@@ -95,7 +115,7 @@ class MainActivity : ComponentActivity() {
                     text = team.name,
                     modifier = modifier
                         .background(backgroundColor)
-                        .clickable { println(team.name) },
+                        .clickable { onClickHandler(team) },
                 )
             }
         }
@@ -107,7 +127,11 @@ class MainActivity : ComponentActivity() {
         F1GeekTheme {
             val driverStore = seedDriverStore()
             val teamStore = seedTeamStore()
-            TeamList(teams = teamStore.teams)
+            TeamList(teams = teamStore.teams,
+                onClickHandler = {},
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(4.dp))
         }
 
     }
