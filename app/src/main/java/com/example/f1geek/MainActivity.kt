@@ -3,11 +3,13 @@ package com.example.f1geek
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -30,10 +32,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
+        //enableEdgeToEdge()
+        var selectedTeam: Team? = null
+
         setContent {
             F1GeekTheme {
-                val driverStore = seedDriverStore()
+                //val driverStore = seedDriverStore()
                 val teamStore = seedTeamStore()
                 var currentScreen by remember { mutableStateOf("") }
 
@@ -47,17 +51,29 @@ class MainActivity : ComponentActivity() {
 
                 val onTeamClick = { team: Team ->
                     println("Selected ${team.name}")
+                    selectedTeam = team
+
                     currentScreen = "Team"
                 }
                 println("Current screen is $currentScreen")
 
                 if (currentScreen === "Team") {
-                    val drivers = teamStore.drivers
-                    DriverList(
-                        drivers = drivers, Modifier
+                    //val drivers = teamStore.drivers.filter { it.team.name === selectedTeam?.name }
+                    val teams = teamStore.teams.filter { it.name === selectedTeam?.name }
+
+                    TeamList(
+                        teams = teams, onTeamClick, Modifier
                             .fillMaxWidth()
                             .padding(4.dp)
                     )
+
+                    DriverList(
+                        teams = teams, onClickHandler = {}, Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp)
+                    )
+
+
                 } else {
                     TeamList(
                         teams = teamStore.teams, onTeamClick, Modifier
@@ -71,12 +87,15 @@ class MainActivity : ComponentActivity() {
 
 
     @Composable
-    fun DriverList(drivers: List<Driver>, modifier: Modifier = Modifier) {
+    fun DriverList(teams: List<Team>,onClickHandler: () -> Unit, modifier: Modifier = Modifier) {
         Column(modifier) {
-            drivers.forEachIndexed { index, driver ->
+            Button(onClick = { onClickHandler() }, modifier = modifier) {
+                Text("Home")
+            }
+            teams.forEachIndexed { index, team ->
                 val backgroundColor = if (index % 2 == 0) Color.LightGray else Color.White
                 Text(
-                    text = driver.fullName,
+                    text = team.primaryDriver.fullName,
                     modifier = modifier.background(backgroundColor)
                 )
             }
