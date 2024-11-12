@@ -4,6 +4,7 @@ class DriverStore(val drivers: List<Driver> = mutableListOf())
 
 fun seedDriverStore(): DriverStore{
 
+
     val drivers = mutableListOf(
         Driver(firstName = "Lewis", surname = "Hamilton", abbreviatedName = "HAM", number = 44),
         Driver(firstName = "Max", surname = "Verstappen", abbreviatedName = "VER", number = 1),

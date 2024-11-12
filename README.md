@@ -115,3 +115,10 @@ classDiagram
 <p align="center">  
   <img src="/img/Screen_Recording_20241018_162025_Figma-ezgif.com-video-to-gif-converter.gif" height="512px"/>
 </p>
+
+
+## I have included ...
+
++ My UNLISTED youtube video (app and test walkthrough): TODO: Add your youtube link here
++ My github repository (this MUST be your github classroom repo): TODO: Add your github repo link here
++ Have you uploaded a zip of your repo to moodle? (yes/no): TODO: Answer here
