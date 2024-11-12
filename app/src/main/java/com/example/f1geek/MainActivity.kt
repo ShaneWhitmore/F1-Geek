@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -95,6 +97,7 @@ class MainActivity : ComponentActivity() {
             Text(text = driver.abbreviatedName)
             Text(text = driver.number.toString())
 
+
         }
 
     }
@@ -130,7 +133,24 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun TeamList(teams: List<Team>,  onClickHandler: (Team) -> Unit ,modifier: Modifier = Modifier) {
+        var filterText by rememberSaveable { mutableStateOf("") }
         Column(modifier) {
+            TextField(
+                value = filterText,
+                onValueChange = { value -> filterText = value },
+                label = { Text("Search") }
+            )
+
+            teams.filter { it.name.contains(filterText, true) }.forEachIndexed { index,team ->
+                val backgroundColor = if (index % 2 == 0) Color.LightGray else Color.White
+                Text(
+                    text = team.name,
+                    modifier = modifier
+                        .background(backgroundColor)
+                        .clickable { onClickHandler(team) },)
+            }
+
+            /*
             teams.forEachIndexed { index, team ->
                 val backgroundColor = if (index % 2 == 0) Color.LightGray else Color.White
                 Text(
@@ -140,6 +160,10 @@ class MainActivity : ComponentActivity() {
                         .clickable { onClickHandler(team) },
                 )
             }
+
+             */
+
+
         }
     }
 
