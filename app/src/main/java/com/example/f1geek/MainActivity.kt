@@ -3,6 +3,7 @@ package com.example.f1geek
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.f1geek.model.Driver
@@ -26,6 +28,9 @@ import com.example.f1geek.model.Team
 import com.example.f1geek.model.seedDriverStore
 import com.example.f1geek.model.seedTeamStore
 import com.example.f1geek.ui.theme.F1GeekTheme
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+
 
 class MainActivity : ComponentActivity() {
 
@@ -86,6 +91,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
+
     @Composable
     fun DriverList(driver: Driver, onClickHandler: (Driver) -> Unit, modifier: Modifier = Modifier) {
         Column(modifier) {
@@ -134,7 +142,16 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun TeamList(teams: List<Team>,  onClickHandler: (Team) -> Unit ,modifier: Modifier = Modifier) {
         var filterText by rememberSaveable { mutableStateOf("") }
-        Column(modifier) {
+        val image = painterResource(R.drawable.background)
+        Box(modifier){
+            Image(painter = image,
+                contentDescription = null
+            )
+        }
+        Column(modifier)
+        {
+
+
             TextField(
                 value = filterText,
                 onValueChange = { value -> filterText = value },
@@ -173,6 +190,7 @@ class MainActivity : ComponentActivity() {
         F1GeekTheme {
             val driverStore = seedDriverStore()
             val teamStore = seedTeamStore()
+
             TeamList(teams = teamStore.teams,
                 onClickHandler = {},
                 modifier = Modifier
