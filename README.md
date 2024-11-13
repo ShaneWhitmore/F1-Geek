@@ -116,6 +116,21 @@ classDiagram
   <img src="/img/Screen_Recording_20241018_162025_Figma-ezgif.com-video-to-gif-converter.gif" height="512px"/>
 </p>
 
+## Implemented User Interface
+ #### Teams List
+<p align="center"> 
+    <img src="/img/teamsList.png" height="512px"/>
+</p>
+
+#### Team Drivers List (Team Details)
+<p align="center"> 
+    <img src="/img/redBullTeam.png" height="512px"/>
+</p>
+
+#### Driver Information
+<p align="center"> 
+    <img src="/img/driverInformation.png" height="512px"/>
+</p>
 
 ## I have included ...
 
