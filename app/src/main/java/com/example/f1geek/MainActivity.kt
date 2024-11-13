@@ -30,6 +30,9 @@ import com.example.f1geek.model.seedTeamStore
 import com.example.f1geek.ui.theme.F1GeekTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.layout.ContentScale
 
 
 class MainActivity : ComponentActivity() {
@@ -96,14 +99,32 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun DriverList(driver: Driver, onClickHandler: (Driver) -> Unit, modifier: Modifier = Modifier) {
+        val image = painterResource(R.drawable.background)
+        val backgroundColor = Color.LightGray
+
+        Box(){
+            Image(
+                painter = image,
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
         Column(modifier) {
             Button(onClick = { onClickHandler.invoke(Driver("","","",0,"")) }, modifier = modifier) {
                 Text("Teams")
             }
 
-            Text(text = driver.fullName)
-            Text(text = driver.abbreviatedName)
-            Text(text = driver.number.toString())
+            Text(text = driver.fullName,
+                modifier = modifier
+                .background(backgroundColor))
+            Text(text = driver.abbreviatedName,
+                modifier = modifier
+                .background(backgroundColor))
+            Text(text = driver.number.toString(),
+                modifier = modifier
+                .background(backgroundColor))
 
 
         }
@@ -113,6 +134,16 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun DriversList(teams: List<Team>,onClickHandler: (Driver) -> Unit, modifier: Modifier = Modifier) {
+        val image = painterResource(R.drawable.background)
+
+        Box(){
+            Image(
+                painter = image,
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
         Column(modifier) {
             Button(onClick = { onClickHandler.invoke(Driver("","","",0,"")) }, modifier = modifier) {
                 Text("Home")
@@ -143,19 +174,22 @@ class MainActivity : ComponentActivity() {
     fun TeamList(teams: List<Team>,  onClickHandler: (Team) -> Unit ,modifier: Modifier = Modifier) {
         var filterText by rememberSaveable { mutableStateOf("") }
         val image = painterResource(R.drawable.background)
-        Box(modifier){
-            Image(painter = image,
-                contentDescription = null
+
+        Box(){
+            Image(
+                painter = image,
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.fillMaxSize()
             )
         }
         Column(modifier)
         {
-
-
             TextField(
                 value = filterText,
                 onValueChange = { value -> filterText = value },
-                label = { Text("Search") }
+                label = { Text("Search") },
+                modifier = Modifier.fillMaxWidth()
             )
 
             teams.filter { it.name.contains(filterText, true) }.forEachIndexed { index,team ->
@@ -195,7 +229,7 @@ class MainActivity : ComponentActivity() {
                 onClickHandler = {},
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(4.dp))
+                    .padding(8.dp))
         }
 
     }
