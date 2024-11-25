@@ -1,15 +1,5 @@
 # F1Geek
 
-## Introduction
-
-Source for the F1Geek android app.
-
-## Student Information
-
-| Field          | Value          |
-|----------------|----------------|
-| Name           | Shane Whitmore |
-| Student Number | 20098910       |
 
 ## User Stories
 
@@ -43,7 +33,7 @@ mindmap
   root((F1 Geek))
     Drivers
         name
-        abreviation
+        abbreviation
         previous contracts/F1 teams
         racing career
     Teams
@@ -131,12 +121,3 @@ classDiagram
 <p align="center"> 
     <img src="/img/driverInformation.png" height="512px"/>
 </p>
-
-## I have included ...
-
-+ My UNLISTED youtube video (app and test walkthrough): TODO: Add your youtube link here 
-  + https://youtu.be/Tmv9ErFWt14
-+ My github repository (this MUST be your github classroom repo): TODO: Add your github repo link here
-  + https://github.com/johnrellissetu/f1geek-20098910.git
-+ Have you uploaded a zip of your repo to moodle? (yes/no): TODO: Answer here
-  + Yes
